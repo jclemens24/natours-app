@@ -1,0 +1,60 @@
+{
+  "name": "natours",
+  "version": "1.0.0",
+  "description": "learning node express mongodb",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon server.js",
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js --public-url /js",
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
+  },
+  "author": "Jordan Clemens",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@sendgrid/mail": "^7.6.0",
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "core-js": "^3.20.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.5.1",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "html-to-text": "^8.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mapbox": "^1.0.0-beta10",
+    "mongoose": "^5.13.13",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.2",
+    "pug": "^3.0.2",
+    "regenerator-runtime": "^0.13.9",
+    "sharp": "^0.29.3",
+    "slugify": "^1.6.3",
+    "stripe": "^8.195.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.4.1",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "ndb": "^1.1.5",
+    "parcel-bundler": "^1.12.5",
+    "prettier": "^2.5.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}

@@ -1,5 +1,4 @@
 /* eslint-disable */
-console.log('Hello from the client side');
 
 export const displayMap = locations => {
   mapboxgl.accessToken =

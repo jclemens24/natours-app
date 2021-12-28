@@ -9,4 +9,7 @@
 <div>
   <h2> API Documentation </h2>
   <p> https://documenter.getpostman.com/view/17912278/UVRBo6Yi </p>
-  
+</div>
+
+<div>
+  <h3> This application is built using Node.JS and the Express.JS framework. Natours simulates server-side rendering, taking advantage of the incomplexity of Pug Templates. Natours supports user authentication, authorization via JSON Web Tokens, password salting and more. Users can view their favorite Hiking trails and book Tours through the Stripe.JS library, or Stripe Checkout. It should be noted, that the current implementation only supports fake transactions and no money will ever change hands, no tour will ever be booked. This app was only built as a learning excercise for myself to simulate real-world business problems and solutions.

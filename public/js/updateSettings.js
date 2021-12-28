@@ -19,11 +19,9 @@ export const updateUserSettings = async function (data, type) {
     if (res.data.status === 'success') {
       localStorage.clear();
       showAlert('success', 'Account Updated Successfully');
-      window.setTimeout(() => {
-        location.assign('/me');
-      }, 1000);
+      location.assign('/me');
     }
   } catch (err) {
-    showAlert('error', err.response.data.message);
+    showAlert('error', err.res.data.message);
   }
 };

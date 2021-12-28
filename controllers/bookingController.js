@@ -29,7 +29,11 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           product_data: {
             name: tour.name,
             description: `${tour.summary}`,
-            images: [tour.imageCover]
+            images: [
+              `${req.protocol}://${req.get('host')}/img/tours/${
+                tour.imageCover
+              }`
+            ]
           }
         },
         quantity: 1
@@ -64,19 +68,8 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook Error ${err.message}`);
   }
 
-  switch (event.type) {
-    case 'checkout.session.completed':
-      /* eslint-disable*/
-      const session = event.data.object;
-      createBookingCheckout(session);
-
-      break;
-
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
-  // if (event.type === 'checkout.session.completed')
-  //   createBookingCheckout(event.data.object);
+  if (event.type === 'checkout.session.completed')
+    createBookingCheckout(event.data.object);
 
   res.status(200).json({ received: true });
 };

@@ -34,6 +34,13 @@ mongoose
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}`);
+});
+
+process.on('SIGTERM', () => {
+  console.log('Sigterm Received. Shutting Down Gracefully');
+  server.close(() => {
+    console.log(`Process terminated!`);
+  });
 });

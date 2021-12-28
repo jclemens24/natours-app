@@ -13,17 +13,15 @@ const signToken = id => {
   });
 };
 
-const prepareResponse = (user, statusCode, res) => {
+const prepareResponse = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-  const cookieOptions = {
+  res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true
-  };
-
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-  res.cookie('jwt', token, cookieOptions);
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+  });
 
   user.password = undefined;
 
@@ -47,7 +45,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://127.0.0.1:3000/me`;
   await new Email(newUser, url).sendWelcome();
 
-  prepareResponse(newUser, 201, res);
+  prepareResponse(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -69,13 +67,14 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // REVIEW: If all is ok, send token to client
 
-  prepareResponse(user, 200, res);
+  prepareResponse(user, 200, req, res);
 });
 
 exports.logout = catchAsync(async (req, res) => {
   res.clearCookie('jwt', 'logmeout', {
     expires: new Date(Date.now() - 10000),
-    httpOnly: true
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
   });
 
   res.status(200).json({
@@ -215,7 +214,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // Defined with a pre save hook on User model
 
   // 4) Log the user in , send jwt
-  prepareResponse(user, 200, res);
+  prepareResponse(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -234,5 +233,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: true });
   // 4) Log user in, send JWT
 
-  prepareResponse(user, 200, res);
+  prepareResponse(user, 200, req, res);
 });

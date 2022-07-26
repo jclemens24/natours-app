@@ -28,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
 app.options('*', cors());
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(__dirname);
+
 // Set security HTTP headers
 app.use(
   helmet({

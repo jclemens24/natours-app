@@ -24,23 +24,23 @@ if (mapBox) {
 }
 
 if (loginForm) {
-  loginForm.addEventListener('submit', function (e) {
+  loginForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    login(email, password);
+    await login(email, password);
   });
 }
 
 if (signUpForm) {
-  signUpForm.addEventListener('submit', function (e) {
+  signUpForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const name = document.querySelector('#name').value;
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     const passwordConfirm = document.querySelector('#passwordConfirm').value;
 
-    signup(name, email, password, passwordConfirm);
+    await signup(name, email, password, passwordConfirm);
   });
 }
 if (logOutBtn) {
